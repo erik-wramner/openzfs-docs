@@ -543,7 +543,10 @@ Step 3: System Installation
    If this system will use Docker (which manages its own datasets &
    snapshots)::
 
-     zfs create rpool/ROOT/ubuntu_$UUID/var/lib/docker
+     zfs create -o mountpoint=/var/lib/docker rpool/DOCKER
+   
+   Docker needs to be in full control. Putting it outside ROOT and USERDATA
+   prevents automatic snapshots, which can break things.
 
    If this system will store local email in /var/mail::
 
